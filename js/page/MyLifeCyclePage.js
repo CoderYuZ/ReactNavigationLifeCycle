@@ -6,8 +6,8 @@ export default class MyLifeCyclePage extends Component {
 
   componentDidMount() {
     this.props.navigation.setParams({
-      onActive:this.onActive,
-      onInactive:this.onInactive
+      onActive:this.onActive.bind(this),
+      onInactive:this.onInactive.bind(this)
     })
   }
 

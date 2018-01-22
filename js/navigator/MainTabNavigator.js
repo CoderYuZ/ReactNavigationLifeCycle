@@ -28,24 +28,21 @@ const MyTabNavigator = TabNavigator(
    }
 );
 
-let tabNavigatorState
-let isCurrentActive
-
 export default class MainTabNavigator extends MyLifeCyclePage {
 
   onActive(){
-    if (tabNavigatorState && !isCurrentActive) {
-      let tabNavigatorStatePatams = tabNavigatorState.routes[tabNavigatorState.index].params
+    if (this.tabNavigatorState && !this.isCurrentActive) {
+      let tabNavigatorStatePatams = this.tabNavigatorState.routes[this.tabNavigatorState.index].params
       if (tabNavigatorStatePatams) {
         tabNavigatorStatePatams.onActive()
-        isCurrentActive = true
+        this.isCurrentActive = true
       }
     }
   }
   onInactive(){
-    isCurrentActive = false
-    if (tabNavigatorState) {
-      let tabNavigatorStatePatams = tabNavigatorState.routes[tabNavigatorState.index].params
+    this.isCurrentActive = false
+    if (this.tabNavigatorState) {
+      let tabNavigatorStatePatams = this.tabNavigatorState.routes[this.tabNavigatorState.index].params
       if (tabNavigatorStatePatams) {
         tabNavigatorStatePatams.onInactive()
       }
@@ -70,8 +67,8 @@ export default class MainTabNavigator extends MyLifeCyclePage {
     }
     if (newStatePatams) {
       newState.routes[newState.index].params.onActive()
-      isCurrentActive = true
-      tabNavigatorState = newState
+      this.isCurrentActive = true
+      this.tabNavigatorState = newState
     }
   }
 

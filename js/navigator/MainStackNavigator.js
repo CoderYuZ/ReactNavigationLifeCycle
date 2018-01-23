@@ -54,11 +54,13 @@ export default class MainStackNavigator extends React.Component {
   onNavigationStateChange(oldState,newState){
     let oldStatePatams = oldState.routes[oldState.index].params
     let newStatePatams = newState.routes[newState.index].params
-    if (oldStatePatams) {
+    // 过滤非MyLifeCyclePage中的setParams
+    if (oldStatePatams && (!newStatePatams || (newStatePatams && oldStatePatams.onInactive!=newStatePatams.onInactive))) {
       oldStatePatams.onInactive()
     }
-    if (newStatePatams) {
-      newState.routes[newState.index].params.onActive()
-    }    
+    // 过滤非MyLifeCyclePage中的setParams
+    if (newStatePatams && (!oldStatePatams || (oldStatePatams && oldStatePatams.onActive!=newStatePatams.onActive))) {
+      newStatePatams.onActive()
+    }   
   }
 }
